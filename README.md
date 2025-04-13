@@ -17,6 +17,16 @@ brew install git
 brew install stow
 ```
 
+### Zoxide
+```
+brew install zoxide
+```
+
+### fzf
+```
+brew install fzf
+```
+
 ## Installation
 
 First, check out the dotfiles repo in the $HOME directory using git
@@ -32,5 +42,7 @@ then use GNU stow to create symlinks
 stow .
 ```
 
-More information can be found in this video at: https://www.youtube.com/watch?v=y6XCebnB9gs
+More information about stow can be found in this video at: https://www.youtube.com/watch?v=y6XCebnB9gs
+More information about zoxide and fzf can be found in this video at: https://www.youtube.com/watch?v=aghxkpyRVDY
+
 

@@ -84,9 +84,8 @@ alias c='clear'
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
+# Setup Anaconda
 export PATH=/opt/homebrew/anaconda3/bin/:$PATH
-
-
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

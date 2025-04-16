@@ -4,31 +4,22 @@ This directory contains the dotfiles for my systems (Mac, Linux and Windows WSL 
 
 ## Requirements
 
-Ensure you have the following installed on the system
+Ensure you have the following installed on the system:
+    Git:        Code Configuration Management Tool
+    Stow:       Symbolic Link File Management Tool
+    Zoxide:     A Better cd Command
+    fzf:        A Fuzzy Search Tool
+    Oh-my-posh: A Highly Customizable Shell Prompt
+    Anaconda:   A Python Environment Tool
 
-### Git (code configuration management)
+### MacOS (assuming brew is installed)
 ```
-brew install git
-```
-
-### Stow (symbolic link file management)
-```
-brew install stow
-```
-
-### Zoxide (a better cd command)
-```
-brew install zoxide
+brew install git stow zoxide fzf oh-my-posh anaconda
 ```
 
-### fzf (fuzzy matching)
+### Linux (assuming apt)
 ```
-brew install fzf
-
-### oh-my-posh (make a customizable shell prompt) 
-```
-brew install oh-my-posh
-```
+sudo apt install git stow zoxide fzf oh-my-posh anaconda
 ```
 
 ## Installation

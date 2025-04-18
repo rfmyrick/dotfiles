@@ -1,4 +1,3 @@
-
 if [[ -f "/opt/homebrew/bin/brew" ]] then
   # If you're using macOS, you'll want this enabled
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -40,7 +39,7 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# If using the default MaxOC Terminal, don't load oh-my-posh because it doesn't handle ASCII characters correctly.
+# If using the default MacOS Terminal, don't load oh-my-posh because it doesn't handle ASCII characters correctly.
 # For all other terminals, load oh-my-posh 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/rfm-zen.toml)"
@@ -83,6 +82,10 @@ eval "$(zoxide init --cmd cd zsh)"
 
 # Setup Anaconda
 export PATH=/opt/homebrew/anaconda3/bin/:$PATH
+
+# set default editor and pager
+export EDITOR='nvim'
+export PAGER='bat'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

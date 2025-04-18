@@ -29,7 +29,7 @@ sudo apt install git stow zoxide fzf oh-my-posh tmux anaconda
 
 First, fetch the tmux tpm (Tmux Plugin Manager) using git
 
-```
+```zsh
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 

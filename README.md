@@ -4,7 +4,7 @@ This directory contains the dotfiles for my systems (Mac, Linux and Windows WSL 
 
 ## Requirements
 
-Ensure you have the following installed on the system:
+    Ensure you have the following installed on the system:
     Git:        Code Configuration Management Tool
     Stow:       Symbolic Link File Management Tool
     Zoxide:     A Better cd Command

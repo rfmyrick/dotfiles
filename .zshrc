@@ -3,6 +3,10 @@ if [[ -f "/opt/homebrew/bin/brew" ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+  export TERM=xterm-256color
+fi
+
 # Set the directory we want to store dotfiles in
 XDG_CONFIG_HOME="${HOME}/.config"
 
@@ -39,11 +43,13 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# If using the default MacOS Terminal, don't load oh-my-posh because it doesn't handle ASCII characters correctly.
-# For all other terminals, load oh-my-posh 
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/rfm-zen.toml)"
-fi 
+# Initialize carapace
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
+# Initialize starship
+eval "$(starship init zsh)"
 
 # Keybindings
 bindkey -e
@@ -72,13 +78,28 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='ls --color'
+alias ls='eza'
+alias ll='eza -alh'
+alias tree='eza --tree --icons --long'
+alias bat='bat' # On Ubuntu, bat is actualled as batcat because of another package conflict
+alias cat='bat'
 alias vim='nvim'
+alias v='nvim'
 alias c='clear'
+alias fd='fd'   # On Ubuntu, fd is actually installed as fdfind because of another package conflict
+alias as='aerospace'
+
+fw() {
+  aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
+}
+
+# Enable vi mode for the command line
+set -o vi
 
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(atuin init zsh)"
 
 # Setup Anaconda
 export PATH=/opt/homebrew/anaconda3/bin/:$PATH
@@ -89,17 +110,27 @@ export PAGER='bat'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+#__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+#        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
 # <<< conda initialize <<<
-#
-#
+
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/rfmyrick/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/rfmyrick/.lmstudio/bin"
+# End of LM Studio CLI section
+
